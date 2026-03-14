@@ -204,6 +204,10 @@ const translations = {
       password: "Contrasenya",
       enter: "Entrar",
       wrongPassword: "Contrasenya incorrecta",
+      wrongCredentials: "Correu o contrasenya incorrectes",
+      emailPh: "admin@mb92.com",
+      changeImage: "Canviar imatge",
+      uploadImage: "Pujar imatge",
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sostenibilitat a través de la innovació.",
