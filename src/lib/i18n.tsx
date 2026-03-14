@@ -19,6 +19,8 @@ const translations = {
       available: "Available",
       limited: "Limited",
       noStock: "No stock items available at the moment.",
+      searchPh: "Search stock...",
+      all: "All",
     },
     inquiry: {
       title: "Inquire About This Stock",
@@ -62,6 +64,10 @@ const translations = {
       password: "Password",
       enter: "Enter",
       wrongPassword: "Incorrect password",
+      wrongCredentials: "Incorrect email or password",
+      emailPh: "admin@mb92.com",
+      changeImage: "Change image",
+      uploadImage: "Upload image",
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sustainability through innovation.",
@@ -83,6 +89,8 @@ const translations = {
       available: "Disponible",
       limited: "Limitado",
       noStock: "No hay artículos en stock en este momento.",
+      searchPh: "Buscar stock...",
+      all: "Todos",
     },
     inquiry: {
       title: "Consultar Sobre Este Stock",
@@ -126,6 +134,10 @@ const translations = {
       password: "Contraseña",
       enter: "Entrar",
       wrongPassword: "Contraseña incorrecta",
+      wrongCredentials: "Correo o contraseña incorrectos",
+      emailPh: "admin@mb92.com",
+      changeImage: "Cambiar imagen",
+      uploadImage: "Subir imagen",
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sostenibilidad a través de la innovación.",
@@ -147,6 +159,8 @@ const translations = {
       available: "Disponible",
       limited: "Limitat",
       noStock: "No hi ha articles en estoc en aquest moment.",
+      searchPh: "Cercar estoc...",
+      all: "Tots",
     },
     inquiry: {
       title: "Consultar Sobre Aquest Estoc",
@@ -190,6 +204,10 @@ const translations = {
       password: "Contrasenya",
       enter: "Entrar",
       wrongPassword: "Contrasenya incorrecta",
+      wrongCredentials: "Correu o contrasenya incorrectes",
+      emailPh: "admin@mb92.com",
+      changeImage: "Canviar imatge",
+      uploadImage: "Pujar imatge",
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sostenibilitat a través de la innovació.",

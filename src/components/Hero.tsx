@@ -9,7 +9,7 @@ const Hero = () => {
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-primary/80" />
+        <div className="absolute inset-0 bg-foreground/75" />
       </div>
       <div className="relative container mx-auto px-4 py-20 md:py-28">
         <div className="max-w-2xl">
@@ -27,7 +27,7 @@ const Hero = () => {
           </p>
           <a
             href="#catalog"
-            className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity"
           >
             {t.hero.cta}
           </a>
