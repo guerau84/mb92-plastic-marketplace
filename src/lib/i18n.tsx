@@ -19,6 +19,8 @@ const translations = {
       available: "Available",
       limited: "Limited",
       noStock: "No stock items available at the moment.",
+      searchPh: "Search stock...",
+      all: "All",
     },
     inquiry: {
       title: "Inquire About This Stock",
