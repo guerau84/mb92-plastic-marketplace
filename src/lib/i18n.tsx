@@ -64,6 +64,10 @@ const translations = {
       password: "Password",
       enter: "Enter",
       wrongPassword: "Incorrect password",
+      wrongCredentials: "Incorrect email or password",
+      emailPh: "admin@mb92.com",
+      changeImage: "Change image",
+      uploadImage: "Upload image",
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sustainability through innovation.",
