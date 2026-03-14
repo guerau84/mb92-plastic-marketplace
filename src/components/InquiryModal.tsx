@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { StockItem, addInquiry } from "@/lib/store";
+import { StockItem } from "@/lib/store";
+import { addInquiryToDB } from "@/lib/db";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 
