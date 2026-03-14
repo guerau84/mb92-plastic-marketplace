@@ -185,6 +185,19 @@ const AdminPage = () => {
 const StockForm = ({ item, onSave, onCancel }: { item: StockItem; onSave: (i: StockItem) => void; onCancel: () => void }) => {
   const { t } = useI18n();
   const [form, setForm] = useState(item);
+  const [preview, setPreview] = useState(item.imageUrl || "");
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      setPreview(result);
+      setForm((f) => ({ ...f, imageUrl: result }));
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="bg-secondary/50 rounded-lg p-4 mb-6 border border-border">
@@ -217,6 +230,15 @@ const StockForm = ({ item, onSave, onCancel }: { item: StockItem; onSave: (i: St
           onChange={(e) => setForm({ ...form, quantity: Number(e.target.value) })}
           className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
         />
+        <div className="flex items-center gap-3">
+          <label className="flex-1 border border-input rounded-md px-3 py-2 text-sm bg-background text-muted-foreground cursor-pointer hover:border-accent transition-colors text-center">
+            {preview ? "Change image" : "Upload image"}
+            <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+          </label>
+          {preview && (
+            <img src={preview} alt="Preview" className="h-10 w-10 rounded object-cover border border-border" />
+          )}
+        </div>
         <textarea
           placeholder={t.admin.description}
           value={form.description}

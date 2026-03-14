@@ -37,7 +37,7 @@ const Index = () => {
               <StockCard
                 key={item.id}
                 item={item}
-                image={defaultImages[item.id] || stockGranulate}
+                image={item.imageUrl || defaultImages[item.id] || stockGranulate}
                 onInquire={setInquiryItem}
               />
             ))}
