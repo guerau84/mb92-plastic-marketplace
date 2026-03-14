@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { getStock, saveStock, getInquiries, StockItem } from "@/lib/store";
+import { StockItem } from "@/lib/store";
+import { useStock } from "@/hooks/useStock";
+import { useInquiries } from "@/hooks/useInquiries";
 import { Trash2, Pencil, Plus, Package, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 
 const AdminPage = () => {
   const { t } = useI18n();
   const [tab, setTab] = useState<"stock" | "inquiries">("stock");
-  const [stock, setStock] = useState(getStock);
-  const inquiries = getInquiries();
+  const { stock, updateStock } = useStock();
+  const { inquiries } = useInquiries();
   const [editing, setEditing] = useState<StockItem | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [authed, setAuthed] = useState(false);
   const [pw, setPw] = useState("");
+  const [email, setEmail] = useState("");
 
   if (!authed) {
     return (
@@ -22,22 +25,29 @@ const AdminPage = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (pw === "mb92admin") {
+              if (email === "admin@mb92.com" && pw === "mb92admin") {
                 setAuthed(true);
               } else {
-                toast.error(t.admin.wrongPassword);
+                toast.error(t.admin.wrongCredentials);
               }
             }}
             className="space-y-3"
           >
             <input
+              type="email"
+              placeholder={t.admin.emailPh}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+            <input
               type="password"
               placeholder={t.admin.password}
               value={pw}
               onChange={(e) => setPw(e.target.value)}
-              className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
-            <button type="submit" className="w-full bg-accent text-accent-foreground font-semibold py-2.5 rounded-md hover:opacity-90 transition-opacity">
+            <button type="submit" className="w-full bg-primary text-primary-foreground font-semibold py-2.5 rounded-md hover:opacity-90 transition-opacity">
               {t.admin.enter}
             </button>
           </form>
@@ -46,46 +56,43 @@ const AdminPage = () => {
     );
   }
 
-  const handleSave = (item: StockItem) => {
+  const handleSave = async (item: StockItem) => {
     let updated: StockItem[];
     if (isNew) {
       updated = [...stock, { ...item, id: crypto.randomUUID() }];
     } else {
       updated = stock.map((s) => (s.id === item.id ? item : s));
     }
-    saveStock(updated);
-    setStock(updated);
+    await updateStock(updated);
     setEditing(null);
     setIsNew(false);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (!confirm(t.admin.deleteConfirm)) return;
     const updated = stock.filter((s) => s.id !== id);
-    saveStock(updated);
-    setStock(updated);
+    await updateStock(updated);
   };
 
   return (
     <div className="min-h-screen bg-background">
       <div className="flex">
-        {/* Sidebar */}
         <aside className="w-56 min-h-[calc(100vh-4rem)] bg-card border-r border-border p-4 hidden md:block">
           <h2 className="font-display font-bold text-foreground mb-6">{t.admin.title}</h2>
           <nav className="space-y-1">
             <button
               onClick={() => setTab("stock")}
-              className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${tab === "stock" ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:bg-secondary"}`}
+              className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${tab === "stock" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"}`}
             >
               <Package className="h-4 w-4" /> {t.admin.stock}
             </button>
             <button
               onClick={() => setTab("inquiries")}
-              className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${tab === "inquiries" ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:bg-secondary"}`}
+              className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${tab === "inquiries" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"}`}
             >
               <MessageSquare className="h-4 w-4" /> {t.admin.inquiries}
               {inquiries.length > 0 && (
-                <span className="ml-auto bg-accent/20 text-accent text-xs font-bold px-1.5 py-0.5 rounded-full">
+                <span className="ml-auto bg-primary/20 text-primary text-xs font-bold px-1.5 py-0.5 rounded-full">
                   {inquiries.length}
                 </span>
               )}
@@ -93,17 +100,15 @@ const AdminPage = () => {
           </nav>
         </aside>
 
-        {/* Mobile tabs */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border flex z-40">
-          <button onClick={() => setTab("stock")} className={`flex-1 py-3 text-sm font-medium text-center ${tab === "stock" ? "text-accent" : "text-muted-foreground"}`}>
+          <button onClick={() => setTab("stock")} className={`flex-1 py-3 text-sm font-medium text-center ${tab === "stock" ? "text-primary" : "text-muted-foreground"}`}>
             <Package className="h-4 w-4 mx-auto mb-1" /> {t.admin.stock}
           </button>
-          <button onClick={() => setTab("inquiries")} className={`flex-1 py-3 text-sm font-medium text-center ${tab === "inquiries" ? "text-accent" : "text-muted-foreground"}`}>
+          <button onClick={() => setTab("inquiries")} className={`flex-1 py-3 text-sm font-medium text-center ${tab === "inquiries" ? "text-primary" : "text-muted-foreground"}`}>
             <MessageSquare className="h-4 w-4 mx-auto mb-1" /> {t.admin.inquiries}
           </button>
         </div>
 
-        {/* Main */}
         <main className="flex-1 p-6 pb-20 md:pb-6">
           {tab === "stock" && (
             <>
@@ -111,7 +116,7 @@ const AdminPage = () => {
                 <h2 className="text-xl font-display font-bold text-foreground">{t.admin.stock}</h2>
                 <button
                   onClick={() => { setEditing({ id: "", name: "", description: "", condition: "good", quantity: 0, imageUrl: "" }); setIsNew(true); }}
-                  className="flex items-center gap-1 bg-accent text-accent-foreground text-sm font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity"
+                  className="flex items-center gap-1 bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity"
                 >
                   <Plus className="h-4 w-4" /> {t.admin.addStock}
                 </button>
@@ -168,7 +173,7 @@ const AdminPage = () => {
                         <span className="text-muted-foreground">{inq.email}</span>
                         {inq.phone && <span className="text-muted-foreground">{inq.phone}</span>}
                       </div>
-                      <p className="text-xs text-accent font-medium mb-1">{inq.stockItemName}</p>
+                      <p className="text-xs text-primary font-medium mb-1">{inq.stockItemName}</p>
                       <p className="text-sm text-foreground">{inq.message}</p>
                     </div>
                   ))}
@@ -210,12 +215,12 @@ const StockForm = ({ item, onSave, onCancel }: { item: StockItem; onSave: (i: St
           placeholder={t.admin.name}
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+          className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <select
           value={form.condition}
           onChange={(e) => setForm({ ...form, condition: e.target.value as StockItem["condition"] })}
-          className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+          className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         >
           <option value="excellent">{t.admin.excellent}</option>
           <option value="good">{t.admin.good}</option>
@@ -228,11 +233,11 @@ const StockForm = ({ item, onSave, onCancel }: { item: StockItem; onSave: (i: St
           placeholder={t.admin.quantity}
           value={form.quantity || ""}
           onChange={(e) => setForm({ ...form, quantity: Number(e.target.value) })}
-          className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+          className="border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <div className="flex items-center gap-3">
-          <label className="flex-1 border border-input rounded-md px-3 py-2 text-sm bg-background text-muted-foreground cursor-pointer hover:border-accent transition-colors text-center">
-            {preview ? "Change image" : "Upload image"}
+          <label className="flex-1 border border-input rounded-md px-3 py-2 text-sm bg-background text-muted-foreground cursor-pointer hover:border-primary transition-colors text-center">
+            {preview ? t.admin.changeImage : t.admin.uploadImage}
             <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
           </label>
           {preview && (
@@ -243,14 +248,14 @@ const StockForm = ({ item, onSave, onCancel }: { item: StockItem; onSave: (i: St
           placeholder={t.admin.description}
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
-          className="md:col-span-2 border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+          className="md:col-span-2 border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
           rows={2}
         />
         <div className="md:col-span-2 flex gap-2 justify-end">
           <button type="button" onClick={onCancel} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             {t.admin.cancel}
           </button>
-          <button type="submit" className="bg-accent text-accent-foreground text-sm font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity">
+          <button type="submit" className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-md hover:opacity-90 transition-opacity">
             {t.admin.save}
           </button>
         </div>
