@@ -10,7 +10,7 @@ const AdminPage = () => {
   const { t } = useI18n();
   const [tab, setTab] = useState<"stock" | "inquiries">("stock");
   const { stock, updateStock } = useStock();
-  const { inquiries } = useInquiries();
+  const { inquiries, deleteInquiry, toggleRead } = useInquiries();
   const [editing, setEditing] = useState<StockItem | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [authed, setAuthed] = useState(false);
