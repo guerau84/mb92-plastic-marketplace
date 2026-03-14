@@ -22,34 +22,10 @@ export interface Inquiry {
 const defaultStock: StockItem[] = [
   {
     id: "1",
-    name: "PP Granulate — Clear",
-    description: "Clean polypropylene granulate recovered from interior paneling removal. Washed and sorted.",
+    name: "PP (plàstic ignifug)",
+    description: "Exemple de plàstic en estat excelent",
     condition: "excellent",
     quantity: 1200,
-    imageUrl: "",
-  },
-  {
-    id: "2",
-    name: "PP Sheet Offcuts — White",
-    description: "White PP sheet material from hull lining replacements. Mixed sizes, minimal contamination.",
-    condition: "good",
-    quantity: 800,
-    imageUrl: "",
-  },
-  {
-    id: "3",
-    name: "PP Pipe Sections — Grey",
-    description: "Grey polypropylene pipe sections from plumbing system refits. Various diameters.",
-    condition: "fair",
-    quantity: 450,
-    imageUrl: "",
-  },
-  {
-    id: "4",
-    name: "PP Container Fragments",
-    description: "Mixed PP container fragments from galley and storage area refurbishments.",
-    condition: "good",
-    quantity: 650,
     imageUrl: "",
   },
 ];

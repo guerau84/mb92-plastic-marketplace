@@ -7,11 +7,15 @@ import Navbar from "@/components/Navbar";
 import Index from "./pages/Index.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <GoogleReCaptchaProvider
+      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+    >
     <TooltipProvider>
       <Sonner />
       <I18nProvider>
@@ -25,6 +29,7 @@ const App = () => (
         </BrowserRouter>
       </I18nProvider>
     </TooltipProvider>
+    </GoogleReCaptchaProvider>
   </QueryClientProvider>
 );
 

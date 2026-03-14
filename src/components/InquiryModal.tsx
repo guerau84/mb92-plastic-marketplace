@@ -4,6 +4,8 @@ import { StockItem } from "@/lib/store";
 import { addInquiryToDB } from "@/lib/db";
 import { X } from "lucide-react";
 import { toast } from "sonner";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import ReCAPTCHA from "react-google-recaptcha";
 
 interface Props {
   item: StockItem;
@@ -11,6 +13,9 @@ interface Props {
 }
 
 const InquiryModal = ({ item, onClose }: Props) => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  const [requireV2, setRequireV2] = useState(false);
+  const [v2Token, setV2Token] = useState(null);
   const { t } = useI18n();
   const [form, setForm] = useState({ companyName: "", email: "", phone: "", message: "" });
 
@@ -21,9 +26,46 @@ const InquiryModal = ({ item, onClose }: Props) => {
       stockItemName: item.name,
       ...form,
     });
+    if (!executeRecaptcha) return;
+
+    const tokenV3 = await executeRecaptcha("contact_form");
+
+    const res = await fetch("/api/verify-captcha", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tokenV3 }),
+    });
+
+    const data = await res.json();
+
+    if (data.requireV2) {
+      setRequireV2(true);
+      return;
+    }
+
+    console.log("Captcha v3 OK");
+    
     toast.success(t.inquiry.success);
     onClose();
   };
+
+const handleV2Submit = async () => {
+      const res = await fetch("/api/verify-captcha", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tokenV2: v2Token }),
+      });
+  
+      const data = await res.json();
+  
+      if (data.success) {
+        console.log("Captcha v2 OK");
+      }
+    }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={onClose}>
@@ -41,7 +83,7 @@ const InquiryModal = ({ item, onClose }: Props) => {
             placeholder={t.inquiry.namePh}
             value={form.companyName}
             onChange={(e) => setForm({ ...form, companyName: e.target.value })}
-            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring"
           />
           <input
             required
@@ -49,13 +91,13 @@ const InquiryModal = ({ item, onClose }: Props) => {
             placeholder={t.inquiry.emailPh}
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring"
           />
           <input
             placeholder={t.inquiry.phonePh}
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring"
           />
           <textarea
             required
@@ -63,11 +105,20 @@ const InquiryModal = ({ item, onClose }: Props) => {
             placeholder={t.inquiry.messagePh}
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
-            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none"
+            className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring resize-none"
           />
+          {requireV2 && (
+        <>
+          <ReCAPTCHA
+            sitekey={import.meta.env.VITE_RECAPTCHA_V2_SITE_KEY}
+            onChange={(token) => setV2Token(token)}
+          />
+          <button onClick={handleV2Submit}>Verificar</button>
+        </>
+      )}
           <button
             type="submit"
-            className="w-full bg-accent text-accent-foreground font-semibold py-2.5 rounded-md hover:opacity-90 transition-opacity"
+            className="w-full bg-primary text-primary-foreground font-semibold py-2.5 rounded-md hover:opacity-90 transition-opacity"
           >
             {t.inquiry.send}
           </button>

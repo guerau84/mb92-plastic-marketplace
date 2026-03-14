@@ -6,6 +6,7 @@ const translations = {
   en: {
     nav: { catalog: "Catalog", admin: "Admin", contact: "Contact Us" },
     hero: {
+      pp: "Polypropylene Recycling",
       title: "Recycled PP Plastic from Superyacht Refits",
       subtitle: "MB92 Barcelona repurposes polypropylene waste from world-class shipyard operations. Browse our available stock and inquire directly.",
       cta: "View Catalog",
@@ -71,11 +72,13 @@ const translations = {
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sustainability through innovation.",
+      madeby: "Made by:"
     },
   },
   es: {
     nav: { catalog: "Catálogo", admin: "Admin", contact: "Contáctenos" },
     hero: {
+      pp: "Reciclaje de polipropileno",
       title: "Plástico PP Reciclado de Reformas de Superyates",
       subtitle: "MB92 Barcelona reutiliza residuos de polipropileno de operaciones de astillero de clase mundial. Consulte nuestro stock disponible y realice su consulta directamente.",
       cta: "Ver Catálogo",
@@ -141,11 +144,13 @@ const translations = {
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sostenibilidad a través de la innovación.",
+      madeby: "Hecho por:"
     },
   },
   ca: {
     nav: { catalog: "Catàleg", admin: "Admin", contact: "Contacta'ns" },
     hero: {
+      pp: "Reciclatge de polipropilè",
       title: "Plàstic PP Reciclat de Reformes de Superxots",
       subtitle: "MB92 Barcelona reutilitza residus de polipropilè d'operacions de drassana de classe mundial. Consulteu el nostre estoc disponible i feu la vostra consulta directament.",
       cta: "Veure Catàleg",
@@ -211,6 +216,7 @@ const translations = {
     },
     footer: {
       rights: "© 2026 MB92 Barcelona. Sostenibilitat a través de la innovació.",
+      madeby: "Fet per:"
     },
   },
 };

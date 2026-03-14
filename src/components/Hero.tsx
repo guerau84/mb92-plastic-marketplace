@@ -16,7 +16,7 @@ const Hero = () => {
           <div className="flex items-center gap-2 mb-4">
             <Recycle className="h-5 w-5 text-accent" />
             <span className="text-sm font-medium text-accent tracking-wide uppercase">
-              Polypropylene Recycling
+              {t.hero.pp}
             </span>
           </div>
           <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight mb-4">

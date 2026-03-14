@@ -22,6 +22,7 @@ const AdminPage = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-card border border-border rounded-lg p-8 w-full max-w-sm shadow-sm">
           <h2 className="font-display font-bold text-xl text-foreground mb-4">{t.admin.login}</h2>
+          {/* Es pot posar una base de dates per guardar les credencials*/}
           <form
             onSubmit={(e) => {
               e.preventDefault();

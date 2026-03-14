@@ -1,5 +1,6 @@
 import { useI18n, Language } from "@/lib/i18n";
 import logo from "@/assets/mb92-logo.png";
+import mpgLogo from "@/assets/logo-mpg.png";
 import { Link, useLocation } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { useState } from "react";
@@ -18,7 +19,7 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="MB92 Barcelona" className="h-10 w-auto" />
           <span className="font-display font-bold text-lg text-primary hidden sm:inline">
-            PP Recycling
+            PP Marketplace <img src={mpgLogo} alt="MPG" width={60}></img>
           </span>
         </Link>
 

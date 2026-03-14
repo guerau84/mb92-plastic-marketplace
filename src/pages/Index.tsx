@@ -5,17 +5,13 @@ import { useStock } from "@/hooks/useStock";
 import Hero from "@/components/Hero";
 import StockCard from "@/components/StockCard";
 import InquiryModal from "@/components/InquiryModal";
-import stockGranulate from "@/assets/stock-granulate.jpg";
-import stockSheets from "@/assets/stock-sheets.jpg";
-import stockPipes from "@/assets/stock-pipes.jpg";
-import stockContainers from "@/assets/stock-containers.jpg";
+import mb92mpgdefualtplasticIMG from "@/assets/plastic-mb92.jpg";
+import mpgLogo from "@/assets/logo-mpg.png";
+import iticbcnLogo from "@/assets/logo-iticbcn.png";
 import { Search } from "lucide-react";
 
 const defaultImages: Record<string, string> = {
-  "1": stockGranulate,
-  "2": stockSheets,
-  "3": stockPipes,
-  "4": stockContainers,
+  "1": mb92mpgdefualtplasticIMG,
 };
 
 const Index = () => {
@@ -95,7 +91,7 @@ const Index = () => {
               <StockCard
                 key={item.id}
                 item={item}
-                image={item.imageUrl || defaultImages[item.id] || stockGranulate}
+                image={item.imageUrl || defaultImages[item.id]}
                 onInquire={setInquiryItem}
               />
             ))}
@@ -104,8 +100,8 @@ const Index = () => {
       </section>
 
       <footer className="border-t border-border bg-card">
-        <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          {t.footer.rights}
+        <div className="container mx-auto px-4 py-8 text-center text-sm text-muted-foreground flex justify-center">
+          {t.footer.rights}, {t.footer.madeby} <img src={mpgLogo} alt="MPG" width={50} className="ml-px mr-px"></img> | <img src={iticbcnLogo} alt="iticbcn" width={60} className="ml-px mr-px"></img>
         </div>
       </footer>
 
