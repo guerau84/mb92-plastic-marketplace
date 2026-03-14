@@ -166,15 +166,34 @@ const AdminPage = () => {
               ) : (
                 <div className="space-y-4">
                   {inquiries.map((inq) => (
-                    <div key={inq.id} className="bg-card border border-border rounded-lg p-4">
-                      <div className="flex flex-wrap gap-4 text-sm mb-2">
-                        <span className="text-muted-foreground">{new Date(inq.date).toLocaleDateString()}</span>
-                        <span className="font-medium text-foreground">{inq.companyName}</span>
-                        <span className="text-muted-foreground">{inq.email}</span>
-                        {inq.phone && <span className="text-muted-foreground">{inq.phone}</span>}
+                    <div key={inq.id} className={`bg-card border rounded-lg p-4 ${inq.read ? 'border-border opacity-70' : 'border-primary/30 bg-primary/5'}`}>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <div className="flex flex-wrap gap-4 text-sm mb-2">
+                            <span className="text-muted-foreground">{new Date(inq.date).toLocaleDateString()}</span>
+                            <span className="font-medium text-foreground">{inq.companyName}</span>
+                            <span className="text-muted-foreground">{inq.email}</span>
+                            {inq.phone && <span className="text-muted-foreground">{inq.phone}</span>}
+                          </div>
+                          <p className="text-xs text-primary font-medium mb-1">{inq.stockItemName}</p>
+                          <p className="text-sm text-foreground">{inq.message}</p>
+                        </div>
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            onClick={() => toggleRead(inq)}
+                            title={inq.read ? "Mark as unread" : "Mark as read"}
+                            className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-secondary transition-colors"
+                          >
+                            {inq.read ? <MailOpen className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
+                          </button>
+                          <button
+                            onClick={() => { if (confirm(t.admin.deleteConfirm)) deleteInquiry(inq.id); }}
+                            className="text-muted-foreground hover:text-destructive p-1 rounded hover:bg-secondary transition-colors"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
                       </div>
-                      <p className="text-xs text-primary font-medium mb-1">{inq.stockItemName}</p>
-                      <p className="text-sm text-foreground">{inq.message}</p>
                     </div>
                   ))}
                 </div>
