@@ -89,6 +89,8 @@ const translations = {
       available: "Disponible",
       limited: "Limitado",
       noStock: "No hay artículos en stock en este momento.",
+      searchPh: "Buscar stock...",
+      all: "Todos",
     },
     inquiry: {
       title: "Consultar Sobre Este Stock",
