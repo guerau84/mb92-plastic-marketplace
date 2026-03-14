@@ -16,6 +16,7 @@ export interface Inquiry {
   phone: string;
   message: string;
   date: string;
+  read?: boolean;
 }
 
 const defaultStock: StockItem[] = [
