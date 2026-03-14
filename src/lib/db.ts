@@ -60,7 +60,7 @@ export async function getAllInquiries(): Promise<Inquiry[]> {
   });
 }
 
-export async function addInquiryToDB(inquiry: Omit<Inquiry, "id" | "date">): Promise<void> {
+export async function addInquiryToDB(inquiry: Omit<Inquiry, "id" | "date" | "read">): Promise<void> {
   const db = await openDB();
   const tx = db.transaction(INQUIRIES_STORE, "readwrite");
   const store = tx.objectStore(INQUIRIES_STORE);
@@ -68,7 +68,30 @@ export async function addInquiryToDB(inquiry: Omit<Inquiry, "id" | "date">): Pro
     ...inquiry,
     id: crypto.randomUUID(),
     date: new Date().toISOString(),
+    read: false,
   });
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+export async function deleteInquiryFromDB(id: string): Promise<void> {
+  const db = await openDB();
+  const tx = db.transaction(INQUIRIES_STORE, "readwrite");
+  const store = tx.objectStore(INQUIRIES_STORE);
+  store.delete(id);
+  return new Promise((resolve, reject) => {
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+export async function updateInquiryInDB(inquiry: Inquiry): Promise<void> {
+  const db = await openDB();
+  const tx = db.transaction(INQUIRIES_STORE, "readwrite");
+  const store = tx.objectStore(INQUIRIES_STORE);
+  store.put(inquiry);
   return new Promise((resolve, reject) => {
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);

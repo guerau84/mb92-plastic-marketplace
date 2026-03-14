@@ -3,14 +3,14 @@ import { useI18n } from "@/lib/i18n";
 import { StockItem } from "@/lib/store";
 import { useStock } from "@/hooks/useStock";
 import { useInquiries } from "@/hooks/useInquiries";
-import { Trash2, Pencil, Plus, Package, MessageSquare } from "lucide-react";
+import { Trash2, Pencil, Plus, Package, MessageSquare, Mail, MailOpen } from "lucide-react";
 import { toast } from "sonner";
 
 const AdminPage = () => {
   const { t } = useI18n();
   const [tab, setTab] = useState<"stock" | "inquiries">("stock");
   const { stock, updateStock } = useStock();
-  const { inquiries } = useInquiries();
+  const { inquiries, deleteInquiry, toggleRead } = useInquiries();
   const [editing, setEditing] = useState<StockItem | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [authed, setAuthed] = useState(false);
@@ -91,9 +91,9 @@ const AdminPage = () => {
               className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${tab === "inquiries" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"}`}
             >
               <MessageSquare className="h-4 w-4" /> {t.admin.inquiries}
-              {inquiries.length > 0 && (
+              {inquiries.filter(i => !i.read).length > 0 && (
                 <span className="ml-auto bg-primary/20 text-primary text-xs font-bold px-1.5 py-0.5 rounded-full">
-                  {inquiries.length}
+                  {inquiries.filter(i => !i.read).length}
                 </span>
               )}
             </button>
@@ -166,15 +166,34 @@ const AdminPage = () => {
               ) : (
                 <div className="space-y-4">
                   {inquiries.map((inq) => (
-                    <div key={inq.id} className="bg-card border border-border rounded-lg p-4">
-                      <div className="flex flex-wrap gap-4 text-sm mb-2">
-                        <span className="text-muted-foreground">{new Date(inq.date).toLocaleDateString()}</span>
-                        <span className="font-medium text-foreground">{inq.companyName}</span>
-                        <span className="text-muted-foreground">{inq.email}</span>
-                        {inq.phone && <span className="text-muted-foreground">{inq.phone}</span>}
+                    <div key={inq.id} className={`bg-card border rounded-lg p-4 ${inq.read ? 'border-border opacity-70' : 'border-primary/30 bg-primary/5'}`}>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <div className="flex flex-wrap gap-4 text-sm mb-2">
+                            <span className="text-muted-foreground">{new Date(inq.date).toLocaleDateString()}</span>
+                            <span className="font-medium text-foreground">{inq.companyName}</span>
+                            <span className="text-muted-foreground">{inq.email}</span>
+                            {inq.phone && <span className="text-muted-foreground">{inq.phone}</span>}
+                          </div>
+                          <p className="text-xs text-primary font-medium mb-1">{inq.stockItemName}</p>
+                          <p className="text-sm text-foreground">{inq.message}</p>
+                        </div>
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            onClick={() => toggleRead(inq)}
+                            title={inq.read ? "Mark as unread" : "Mark as read"}
+                            className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-secondary transition-colors"
+                          >
+                            {inq.read ? <MailOpen className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
+                          </button>
+                          <button
+                            onClick={() => { if (confirm(t.admin.deleteConfirm)) deleteInquiry(inq.id); }}
+                            className="text-muted-foreground hover:text-destructive p-1 rounded hover:bg-secondary transition-colors"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
                       </div>
-                      <p className="text-xs text-primary font-medium mb-1">{inq.stockItemName}</p>
-                      <p className="text-sm text-foreground">{inq.message}</p>
                     </div>
                   ))}
                 </div>

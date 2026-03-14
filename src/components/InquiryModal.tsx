@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { StockItem, addInquiry } from "@/lib/store";
+import { StockItem } from "@/lib/store";
+import { addInquiryToDB } from "@/lib/db";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 
@@ -13,9 +14,9 @@ const InquiryModal = ({ item, onClose }: Props) => {
   const { t } = useI18n();
   const [form, setForm] = useState({ companyName: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addInquiry({
+    await addInquiryToDB({
       stockItemId: item.id,
       stockItemName: item.name,
       ...form,
@@ -25,7 +26,7 @@ const InquiryModal = ({ item, onClose }: Props) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-primary/40 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={onClose}>
       <div className="bg-card rounded-lg shadow-xl w-full max-w-md mx-4 p-6" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-display font-bold text-lg text-foreground">{t.inquiry.title}</h2>
