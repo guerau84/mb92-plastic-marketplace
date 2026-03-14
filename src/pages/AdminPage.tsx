@@ -91,9 +91,9 @@ const AdminPage = () => {
               className={`flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${tab === "inquiries" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"}`}
             >
               <MessageSquare className="h-4 w-4" /> {t.admin.inquiries}
-              {inquiries.length > 0 && (
+              {inquiries.filter(i => !i.read).length > 0 && (
                 <span className="ml-auto bg-primary/20 text-primary text-xs font-bold px-1.5 py-0.5 rounded-full">
-                  {inquiries.length}
+                  {inquiries.filter(i => !i.read).length}
                 </span>
               )}
             </button>
