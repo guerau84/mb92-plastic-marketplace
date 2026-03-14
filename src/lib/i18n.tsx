@@ -159,6 +159,8 @@ const translations = {
       available: "Disponible",
       limited: "Limitat",
       noStock: "No hi ha articles en estoc en aquest moment.",
+      searchPh: "Cercar estoc...",
+      all: "Tots",
     },
     inquiry: {
       title: "Consultar Sobre Aquest Estoc",
