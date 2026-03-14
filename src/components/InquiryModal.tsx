@@ -14,9 +14,9 @@ const InquiryModal = ({ item, onClose }: Props) => {
   const { t } = useI18n();
   const [form, setForm] = useState({ companyName: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addInquiry({
+    await addInquiryToDB({
       stockItemId: item.id,
       stockItemName: item.name,
       ...form,
