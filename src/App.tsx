@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <GoogleReCaptchaProvider
-      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_V3_SITE_KEY}
     >
     <TooltipProvider>
       <Sonner />
