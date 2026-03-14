@@ -3,7 +3,7 @@ import { useI18n } from "@/lib/i18n";
 import { StockItem } from "@/lib/store";
 import { useStock } from "@/hooks/useStock";
 import { useInquiries } from "@/hooks/useInquiries";
-import { Trash2, Pencil, Plus, Package, MessageSquare } from "lucide-react";
+import { Trash2, Pencil, Plus, Package, MessageSquare, Mail, MailOpen } from "lucide-react";
 import { toast } from "sonner";
 
 const AdminPage = () => {
