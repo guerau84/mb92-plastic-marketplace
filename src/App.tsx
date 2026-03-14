@@ -8,6 +8,7 @@ import Index from "./pages/Index.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { Analytics } from "@vercel/analytics/react"
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <I18nProvider>
         <BrowserRouter>
           <Navbar />
+          <Analytics/>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminPage />} />
