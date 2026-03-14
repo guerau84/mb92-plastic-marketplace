@@ -40,7 +40,7 @@ const StockCard = ({ item, image, onInquire }: Props) => {
           </span>
         </div>
         <h3 className="font-display font-semibold text-foreground mb-1">{item.name}</h3>
-        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{item.description}</p>
+        <p className="text-sm text-muted-foreground mb-3">{item.description}</p>
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-foreground">
             {item.quantity} {t.catalog.kg}
