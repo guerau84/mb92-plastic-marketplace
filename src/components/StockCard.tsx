@@ -47,7 +47,7 @@ const StockCard = ({ item, image, onInquire }: Props) => {
           </span>
           <button
             onClick={() => onInquire(item)}
-            className="bg-accent text-accent-foreground text-sm font-semibold px-4 py-1.5 rounded-md hover:opacity-90 transition-opacity"
+            className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-1.5 rounded-md hover:opacity-90 transition-opacity"
           >
             {t.catalog.inquire}
           </button>
