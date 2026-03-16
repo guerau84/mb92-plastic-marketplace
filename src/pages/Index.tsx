@@ -8,7 +8,7 @@ import InquiryModal from "@/components/InquiryModal";
 import mb92mpgdefualtplasticIMG from "@/assets/plastic-mb92.jpg";
 import mpgLogo from "@/assets/logo-mpg.png";
 import iticbcnLogo from "@/assets/logo-iticbcn.png";
-import { Search } from "lucide-react";
+import { Search, Github } from "lucide-react";
 
 const defaultImages: Record<string, string> = {
   "1": mb92mpgdefualtplasticIMG,
@@ -101,8 +101,9 @@ const Index = () => {
 
       <footer className="border-t border-border bg-card">
         <div className="container mx-auto px-4 py-8 text-center text-sm text-muted-foreground flex justify-center">
-          {t.footer.rights}, {t.footer.madeby} <img src={mpgLogo} alt="MPG" width={50} className="ml-px mr-px"></img> | <img src={iticbcnLogo} alt="iticbcn" width={60} className="ml-px mr-px"></img>
+          {t.footer.rights}, {t.footer.madeby} <img src={mpgLogo} alt="MPG" width={60} className="ml-4 mr-4"></img> | <img src={iticbcnLogo} alt="iticbcn" width={70} className="ml-4 mr-4"></img>
         </div>
+        {/* <div className="text-center flex justify-center align-center px-2 py-2"><a className="text-sm text-gray-400 hover:text-black transition" href="https://github.com/guerau84/mb92-plastic-marketplace"><Github size={24}/></a></div> */}
       </footer>
 
       {inquiryItem && (

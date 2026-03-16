@@ -71,7 +71,7 @@ const translations = {
       uploadImage: "Upload image",
     },
     footer: {
-      rights: "© 2026 MB92 Barcelona. Sustainability through innovation.",
+      rights: "© 2026 MB92 Barcelona",
       madeby: "Made by:"
     },
   },
@@ -143,7 +143,7 @@ const translations = {
       uploadImage: "Subir imagen",
     },
     footer: {
-      rights: "© 2026 MB92 Barcelona. Sostenibilidad a través de la innovación.",
+      rights: "© 2026 MB92 Barcelona",
       madeby: "Hecho por:"
     },
   },
@@ -215,7 +215,7 @@ const translations = {
       uploadImage: "Pujar imatge",
     },
     footer: {
-      rights: "© 2026 MB92 Barcelona. Sostenibilitat a través de la innovació.",
+      rights: "© 2026 MB92 Barcelona",
       madeby: "Fet per:"
     },
   },
