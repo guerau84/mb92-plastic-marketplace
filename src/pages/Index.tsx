@@ -6,7 +6,7 @@ import Hero from "@/components/Hero";
 import StockCard from "@/components/StockCard";
 import InquiryModal from "@/components/InquiryModal";
 import mb92mpgdefualtplasticIMG from "@/assets/plastic-mb92.jpg";
-import mpgLogo from "@/assets/logo-mpg.png";
+import mpgLogo from "@/assets/MPG_logo_classic_v5.png";
 import iticbcnLogo from "@/assets/logo-iticbcn.png";
 import { Search, Github } from "lucide-react";
 

@@ -1,6 +1,6 @@
 import { useI18n, Language } from "@/lib/i18n";
 import logo from "@/assets/mb92-logo.png";
-import mpgLogo from "@/assets/logo-mpg.png";
+import mpgLogo from "@/assets/MPG_logo_classic_v5.png";
 import { Link, useLocation } from "react-router-dom";
 import { Globe } from "lucide-react";
 import { useState } from "react";

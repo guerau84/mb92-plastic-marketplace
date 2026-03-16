@@ -1,0 +1,16 @@
+<svg width="100%" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  
+<mask id="imagine-text-gaps-m6llgd" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="260" fill="white"/><rect x="82.59403991699219" y="72.62242126464844" width="130.81194305419922" height="140.6212158203125" fill="black" rx="2"/><rect x="201.927001953125" y="72.62242126464844" width="92.1460189819336" height="140.6212158203125" fill="black" rx="2"/><rect x="299.57110595703125" y="72.62242126464844" width="105.25577545166016" height="140.6212158203125" fill="black" rx="2"/></mask></defs>
+
+<text x="148" y="185" text-anchor="middle" style="fill:rgb(45, 45, 45);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:120px;font-weight:600;text-anchor:middle;dominant-baseline:auto">M</text>
+<text x="248" y="185" text-anchor="middle" style="fill:rgb(45, 45, 45);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:120px;font-weight:600;text-anchor:middle;dominant-baseline:auto">P</text>
+<text x="352" y="185" text-anchor="middle" style="fill:rgb(45, 106, 79);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:120px;font-weight:600;text-anchor:middle;dominant-baseline:auto">G</text>
+
+<ellipse cx="366" cy="155" rx="14" ry="6" fill="#52B788" transform="rotate(-10 366 155)" style="fill:rgb(82, 183, 136);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<ellipse cx="358" cy="152" rx="8" ry="4" fill="#2D6A4F" transform="rotate(-10 358 152)" opacity="0.6" style="fill:rgb(45, 106, 79);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+<!-- Line only under the letters -->
+<line x1="82" y1="202" x2="418" y2="202" mask="url(#imagine-text-gaps-m6llgd)" style="fill:rgb(0, 0, 0);stroke:rgb(45, 106, 79);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+</svg>
