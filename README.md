@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+# MB92 Plastic Marketplace
 
-## Project info
+> **MPG | MB92 | MetropolisFPLab — Phase 3 (Prototyping)**
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+A plastic materials marketplace developed as a prototype within the MetropolisFPLab project. Initially generated with [Lovable.dev](https://lovable.dev) and later modified to add reCAPTCHA and other improvements.
 
-## How can I edit this code?
+🔗 **Live demo:** [mb92-plastic-marketplace.vercel.app](https://mb92-plastic-marketplace.vercel.app)
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **Vite** — bundler and development server
+- **TypeScript** — static typing
+- **React** — UI library
+- **shadcn/ui** — accessible and customizable UI components
+- **Tailwind CSS** — utility-first styling
+- **Google reCAPTCHA** — bot protection on forms
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## Project Structure
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```
+mb92-plastic-marketplace/
+├── api/          # Serverless functions (Vercel)
+├── public/       # Static assets
+├── src/          # React application source code
+├── index.html
+├── vite.config.ts
+├── tailwind.config.ts
+└── package.json
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## Installation & Local Setup
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Prerequisites: **Node.js** and **npm** (or **bun**). Version management with [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) is recommended.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```bash
+# 1. Clone the repository
+git clone https://github.com/guerau84/mb92-plastic-marketplace.git
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 2. Navigate to the project directory
+cd mb92-plastic-marketplace
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Other commands
 
-**Use GitHub Codespaces**
+```bash
+npm run build      # Build for production
+npm run preview    # Preview the production build
+npm run test       # Run tests (Vitest)
+npm run lint       # Lint the code with ESLint
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+The project is deployed on **Vercel**. Any push to the `main` branch triggers an automatic deployment.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+To deploy manually, import the repository on [vercel.com](https://vercel.com) and follow the setup steps.
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Environment Variables
 
-## Can I connect a custom domain to my Lovable project?
+For reCAPTCHA to work correctly, define the keys in a `.env` file:
 
-Yes, you can!
+```env
+VITE_RECAPTCHA_SITE_KEY=your_public_site_key
+RECAPTCHA_SECRET_KEY=your_secret_key
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+> ⚠️ Never commit the `.env` file to the repository.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+## Changes from the Original Lovable Project
+
+- Integration of **Google reCAPTCHA v2/v3** on contact and registration forms
+- Serverless functions under `/api` to validate the reCAPTCHA token on the backend
+- Other minor UI and behaviour tweaks
+
+---
+
+## Project Context
+
+This prototype is part of **Phase 3 (Prototyping)** of the **MPG | MB92 | MetropolisFPLab** project, an initiative that explores the reuse and trade of plastic materials through a digital marketplace.
+
+---
+
+## License
+
+This project is open source. See the `LICENSE` file for more details (if applicable).
