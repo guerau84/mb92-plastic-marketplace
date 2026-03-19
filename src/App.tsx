@@ -9,6 +9,8 @@ import AdminPage from "./pages/AdminPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Analytics } from "@vercel/analytics/react"
+import ClickyAnalytics from "@/analytics/ClickyAnalytics";
+import ClickyRouteTracker from "@/analytics/ClickyRouteTracker";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
         <BrowserRouter>
           <Navbar />
           <Analytics/>
+          <ClickyAnalytics />
+      <ClickyRouteTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminPage />} />

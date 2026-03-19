@@ -104,6 +104,7 @@ const Index = () => {
           {t.footer.rights}, {t.footer.madeby} <img src={mpgLogo} alt="MPG" width={60} className="ml-4 mr-4"></img> | <img src={iticbcnLogo} alt="iticbcn" width={70} className="ml-4 mr-4"></img>
         </div>
         {/* <div className="text-center flex justify-center align-center px-2 py-2"><a className="text-sm text-gray-400 hover:text-black transition" href="https://github.com/guerau84/mb92-plastic-marketplace"><Github size={24}/></a></div> */}
+        <a title="Google Analytics Alternative" href="https://clicky.com/"><img alt="Clicky" src="//static.getclicky.com/media/links/badge.gif"/></a>
       </footer>
 
       {inquiryItem && (
