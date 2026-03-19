@@ -7,8 +7,7 @@ export default function ClickyAnalytics() {
     script.type = "text/javascript";
     script.async = true;
     script.src = "https://static.getclicky.com/js";
-    script.setAttribute("data-id", "101503174"); // ← tu ID
-    // import.meta.env.CLICKY_SITE_KEY
+    script.setAttribute("data-id", import.meta.env.CLICKY_SITE_KEY);
 
     document.head.appendChild(script);
 
