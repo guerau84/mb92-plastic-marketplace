@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Index from "./pages/Index.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Cookies from "./pages/Cookies.tsx";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Analytics } from "@vercel/analytics/react"
 import ClickyAnalytics from "@/analytics/ClickyAnalytics";
@@ -26,10 +27,11 @@ const App = () => (
           <Navbar />
           <Analytics/>
           <ClickyAnalytics />
-      <ClickyRouteTracker />
+          <ClickyRouteTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/cookies" element={<Cookies/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
