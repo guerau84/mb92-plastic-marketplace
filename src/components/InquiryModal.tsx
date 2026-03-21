@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { toast } from "sonner";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useCookieConsent } from "@/hooks/useCookieConsent";
 
 interface Props {
   item: StockItem;
@@ -18,6 +19,7 @@ const InquiryModal = ({ item, onClose }: Props) => {
   const [v2Token, setV2Token] = useState(null);
   const { t } = useI18n();
   const [form, setForm] = useState({ companyName: "", email: "", phone: "", message: "" });
+  const marketingConsent = useCookieConsent();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +28,21 @@ const InquiryModal = ({ item, onClose }: Props) => {
       stockItemName: item.name,
       ...form,
     });
-    if (!executeRecaptcha) return;
+    if (!marketingConsent || !executeRecaptcha) {
+      toast.error(
+        <>
+          {t.inquiry.cookies}{" "}
+          <a
+            href="/cookies"
+            className="underline font-medium"
+          >
+            {t.inquiry.whycookies}
+          </a>
+        </>
+      );
+      return;
+    }
+      
 
     const tokenV3 = await executeRecaptcha("contact_form");
 
