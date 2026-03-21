@@ -3,6 +3,7 @@ import { useI18n } from "@/lib/i18n";
 import { StockItem } from "@/lib/store";
 import { useStock } from "@/hooks/useStock";
 import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 import StockCard from "@/components/StockCard";
 import InquiryModal from "@/components/InquiryModal";
 import mb92mpgdefualtplasticIMG from "@/assets/plastic-mb92.jpg";
@@ -99,13 +100,7 @@ const Index = () => {
         )}
       </section>
 
-      <footer className="border-t border-border bg-card">
-        <div className="container mx-auto px-4 py-8 text-center text-sm text-muted-foreground flex justify-center">
-          {t.footer.rights}, {t.footer.madeby} <img src={mpgLogo} alt="MPG" width={60} className="ml-4 mr-4"></img> | <img src={iticbcnLogo} alt="iticbcn" width={70} className="ml-4 mr-4"></img>
-        </div>
-        {/* <div className="text-center flex justify-center align-center px-2 py-2"><a className="text-sm text-gray-400 hover:text-black transition" href="https://github.com/guerau84/mb92-plastic-marketplace"><Github size={24}/></a></div> */}
-        <a title="Google Analytics Alternative" href="https://clicky.com/"><img alt="Clicky" src="//static.getclicky.com/media/links/badge.gif"/></a>
-      </footer>
+      <Footer/>
 
       {inquiryItem && (
         <InquiryModal item={inquiryItem} onClose={() => setInquiryItem(null)} />

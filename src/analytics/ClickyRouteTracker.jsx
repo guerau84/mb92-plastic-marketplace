@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-export default function ClickyRouteTracker() {
+function ClickyRouteTracker() {
   const location = useLocation();
 
   useEffect(() => {
@@ -14,3 +14,4 @@ export default function ClickyRouteTracker() {
 
   return null;
 }
+export default ClickyRouteTracker;

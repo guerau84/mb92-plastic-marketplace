@@ -7,18 +7,21 @@ import Navbar from "@/components/Navbar";
 import Index from "./pages/Index.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import Cookies from "./pages/Cookies.tsx";
 import { Analytics } from "@vercel/analytics/react"
 import ClickyAnalytics from "@/analytics/ClickyAnalytics";
 import ClickyRouteTracker from "@/analytics/ClickyRouteTracker";
-
+import RecaptchaWrapper from "@/RecaptchaWrapper"
+import { useCookieConsent } from "@/hooks/useCookieConsent";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <GoogleReCaptchaProvider
-      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_V3_SITE_KEY}
-    >
+    <GoogleReCaptchaProvider reCaptchaKey={import.meta.env.VITE_RECAPTCHA_V3_SITE_KEY} scriptProps={{
+        async: true,
+        defer: true,
+      }}>
     <TooltipProvider>
       <Sonner />
       <I18nProvider>
@@ -26,10 +29,11 @@ const App = () => (
           <Navbar />
           <Analytics/>
           <ClickyAnalytics />
-      <ClickyRouteTracker />
+          <ClickyRouteTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/cookies" element={<Cookies/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

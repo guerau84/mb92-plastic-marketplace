@@ -35,6 +35,8 @@ const translations = {
       emailPh: "email@company.com",
       phonePh: "+34 ...",
       messagePh: "Tell us about your needs...",
+      cookies: "You must accept cookies to submit the form",
+      whycookies: "More Info"
     },
     admin: {
       title: "Admin Dashboard",
@@ -107,6 +109,8 @@ const translations = {
       emailPh: "email@empresa.com",
       phonePh: "+34 ...",
       messagePh: "Cuéntenos sus necesidades...",
+      cookies: "Debes aceptar cookies para enviar el formulario",
+      whycookies: "Más Info",
     },
     admin: {
       title: "Panel de Administración",
@@ -179,6 +183,8 @@ const translations = {
       emailPh: "email@empresa.com",
       phonePh: "+34 ...",
       messagePh: "Expliqueu-nos les vostres necessitats...",
+      cookies: "Has d'acceptar cookies per enviar el formulari",
+      whycookies: "Més info"
     },
     admin: {
       title: "Panell d'Administració",
